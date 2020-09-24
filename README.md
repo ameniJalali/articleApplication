@@ -22,3 +22,6 @@ Method | Path           | Description                    |
 GET    | /articles      | retrieve all the articles      |
 GET    | /articles/{id} | retrieve one article by its ID |
 
+### 1.4
+
+![alt text](http://url/to/img.png)
