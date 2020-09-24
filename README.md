@@ -20,7 +20,7 @@ $ mvn spring-boot:run
 Method | Path           | Description                    |
 -------|----------------|--------------------------------|
 GET    | /articles      | retrieve all the articles      |
-GET    | /articles/{id} | retrieve one article by its ID |
+GET    | /article/{id} | retrieve one article by its ID |
 
 ### 2.3. Initialiser un projet Web avec Spring Boot
 
@@ -51,8 +51,11 @@ Hibernate est l'ORM de référence du monde Java.
 
 JPA est la norme Java standard couvrant la problématique de la persistence de données.
 
-Spring Data JPA est une abstraction de JPA dans l'univers Spring. Par défaut, Spring Data JPA utilise Hibernate comme
-implémentation de #### 2.6.1. Déclaration de la dépendance Spring Data JPA pour Spring Boot
+Spring Data JPA est une abstraction de JPA dans l'univers Spring. 
+Par défaut, Spring Data JPA utilise Hibernate comme
+implémentation 
+
+#### 2.6.1. Déclaration de la dépendance Spring Data JPA pour Spring Boot
                   
                   La première chose à faire est d'ajouter dans le pom.xml la dépendance du starter Spring Boot pour Spring Data JPA :
                   
@@ -76,7 +79,7 @@ implémentation de #### 2.6.1. Déclaration de la dépendance Spring Data JPA po
 
 
 
-### 1.4
+### 1.4 Les tests ...
 
 ![alt text](https://github.com/ameniJalali/articleApplication/blob/master/img1.PNG)
 
