@@ -54,7 +54,7 @@ public class ArticleControllerTest {
         Long articleId = 1L;
         given(articleService.getArticleById(articleId)).willReturn(Optional.empty());
 
-        this.mockMvc.perform(get("/api/articles/{id}", articleId))
+        this.mockMvc.perform(get("/api/article/{id}", articleId))
                 .andExpect(status().isNotFound());
 
     }
