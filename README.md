@@ -24,4 +24,6 @@ GET    | /articles/{id} | retrieve one article by its ID |
 
 ### 1.4
 
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/ameniJalali/articleApplication/blob/master/img1.PNG)
+
+![alt text](https://github.com/ameniJalali/articleApplication/blob/master/img2.PNG)
