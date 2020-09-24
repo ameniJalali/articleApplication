@@ -9,6 +9,6 @@ public interface ArticleService {
 
     List<Article> getAllArticles();
 
-    Optional<Article> getArticleById(long articleId);
+    Optional<Article> getArticleById(Long articleId);
 
 }

@@ -23,7 +23,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Optional<Article> getArticleById(long articleId) {
+    public Optional<Article> getArticleById(Long articleId) {
         Article article = articleRepository.getByArticleId(articleId);
         return Optional.of(article);
     }
