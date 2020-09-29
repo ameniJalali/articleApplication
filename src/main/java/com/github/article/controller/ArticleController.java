@@ -1,31 +1,37 @@
 package com.github.article.controller;
 
 import com.github.article.entity.Article;
+import com.github.article.exception.ArticleNotFoundException;
 import com.github.article.services.ArticleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/articles")
 public class ArticleController {
-    @Autowired
+
+
     private ArticleService articleService;
 
-    @GetMapping("article/{id}")
-    public ResponseEntity<Article> getArticleById(@PathVariable("id") Long id) {
-
-        return articleService.getArticleById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ArticleController(ArticleService articleService) {
+        this.articleService = articleService;
     }
 
-    @GetMapping("articles")
-    public ResponseEntity<List<Article>> getAllArticles() {
-        List<Article> list = articleService.getAllArticles();
-        return new ResponseEntity<List<Article>>(list, HttpStatus.OK);
+
+    @GetMapping
+    public List<Article> getAllArticles() {
+        return articleService.getAllArticles();
+
     }
+
+    @GetMapping("/{title}")
+    public Article findArticleByTitle(@PathVariable("title") String title) {
+        return articleService.getArticleDetails(title);
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public void articleNotFoundHandler(ArticleNotFoundException ex ){}
 
 }

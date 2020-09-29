@@ -3,22 +3,30 @@ package com.github.article;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.article.controller.ArticleController;
 import com.github.article.entity.Article;
+import com.github.article.exception.ArticleNotFoundException;
 import com.github.article.services.ArticleService;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+//@RunWith(SpringRunner.class)
 @WebMvcTest(controllers = ArticleController.class)
 public class ArticleControllerTest {
 
@@ -27,9 +35,6 @@ public class ArticleControllerTest {
 
     @MockBean
     private ArticleService articleService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     private List<Article> articleList;
 
@@ -50,12 +55,22 @@ public class ArticleControllerTest {
     }
 
     @Test
-    void shouldReturn404WhenFetchingNonExistingArticle() throws Exception {
-        Long articleId = 1L;
-        given(articleService.getArticleById(articleId)).willReturn(Optional.empty());
+    public void shouldReturnArticle() throws Exception {
+        given(articleService.getArticleDetails(anyString())).willReturn(new Article(4L, "titlkk","categ1"));
 
-        this.mockMvc.perform(get("/api/article/{id}", articleId))
-                .andExpect(status().isNotFound());
+        mockMvc.perform(get("/api/articles/titlkk"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("title").value("titlkk"))
+                .andExpect(jsonPath("category").value("categ1"));
 
+    }
+
+    @Test
+    public void getArticle_notFound() throws Exception {
+        given(articleService.getArticleDetails(anyString()))
+                .willThrow(new ArticleNotFoundException());
+
+        mockMvc.perform(get("/api/articles/titlkk"))
+                .andExpect(status().isNotFound());;
     }
 }
