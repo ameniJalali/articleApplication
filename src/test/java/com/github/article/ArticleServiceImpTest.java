@@ -33,7 +33,6 @@ public class ArticleServiceImpTest {
     public void setup() throws Exception {
         articleService = new ArticleServiceImpl(articleRepository);
         article = new Article();
-        article.setArticleId(1L);
         article.setCategory("categ5");
         article.setTitle("title1");
     }
@@ -55,7 +54,7 @@ public class ArticleServiceImpTest {
     public void getArticleDetails_returnArticleInfo() {
         //given
         given(articleRepository.findArticleByTitle("titlkk"))
-                .willReturn(new Article(1L, "titlkk", "categ1"));
+                .willReturn(new Article( "titlkk", "categ1"));
         //when
         Article article = articleService.getArticleDetails("titlkk");
         //then

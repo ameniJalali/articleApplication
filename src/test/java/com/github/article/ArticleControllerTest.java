@@ -41,9 +41,9 @@ public class ArticleControllerTest {
     @Before
    public  void setUp() {
         this.articleList = new ArrayList<>();
-        this.articleList.add(new Article(1L, "title1","categ1"));
-        this.articleList.add(new Article(2L, "title2","categ2"));
-        this.articleList.add(new Article(3L, "title3","categ3"));
+        this.articleList.add(new Article( "title1","categ1"));
+        this.articleList.add(new Article( "title2","categ2"));
+        this.articleList.add(new Article( "title3","categ3"));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ArticleControllerTest {
 
     @Test
     public void shouldReturnArticle() throws Exception {
-        given(articleService.getArticleDetails(anyString())).willReturn(new Article(4L, "titlkk","categ1"));
+        given(articleService.getArticleDetails(anyString())).willReturn(new Article( 1L, "titlkk","categ1"));
 
         mockMvc.perform(get("/api/articles/titlkk"))
                 .andExpect(status().isOk())

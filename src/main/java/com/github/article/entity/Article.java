@@ -10,7 +10,7 @@ public class Article implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long articleId;
 
     private String title;
@@ -18,6 +18,10 @@ public class Article implements Serializable {
     private String category;
 
     public Article() {
+    }
+    public Article( String title, String category) {
+        this.title = title;
+        this.category = category;
     }
 
     public Article(Long articleId , String title, String category) {
