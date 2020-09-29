@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArticleRepository extends CrudRepository<Article, String>, JpaSpecificationExecutor<Article> {
-
-    Article getByArticleId(Long articleId);
-
+    
     Article  findArticleByTitle ( String title);
 }
